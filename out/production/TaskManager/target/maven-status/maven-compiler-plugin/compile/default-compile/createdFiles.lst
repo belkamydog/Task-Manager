@@ -1,9 +1,0 @@
-ru/gateway/controller/UserController.class
-ru/gateway/GatewayApp.class
-ru/gateway/filters/JwtAuthFilter.class
-ru/gateway/exceptions/InvalidJwtTokenException.class
-ru/gateway/service/UserService.class
-ru/gateway/config/SecurityConfig.class
-ru/gateway/service/UserServiceClient.class
-ru/gateway/service/JwtService.class
-ru/gateway/models/UserDto.class
