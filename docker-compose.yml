@@ -1,0 +1,94 @@
+version: "3.9"
+services:
+  user-service:
+    build:
+      context: src/UserService
+    networks:
+      - internal
+    depends_on:
+      - user-db
+    environment:
+      USERS_DB_URL: ${USERS_DB_URL}
+      USERS_DB_USERNAME: ${USERS_DB_USERNAME}
+      USERS_DB_PASSWORD: ${USERS_DB_PASSWORD}
+      USERS_DB_NAME: ${USERS_DB_NAME}
+      DB_PORT: 5432
+      JWT_SECURE_KEY: ${JWT_SECURE_KEY}
+  user-db:
+    image: postgres:15
+    container_name: ${USERS_DB_URL}
+    networks:
+      - internal
+    restart: always
+    environment:
+      POSTGRES_USER: ${USERS_DB_USERNAME}
+      POSTGRES_PASSWORD: ${USERS_DB_PASSWORD}
+      POSTGRES_DB: ${USERS_DB_NAME}
+
+
+  task-service:
+    build:
+      context: src/TasksService
+    networks:
+      - internal
+    depends_on:
+      - task-db
+    environment:
+      TASK_DB_URL: ${TASK_DB_URL}
+      TASK_DB_USERNAME: ${TASK_DB_USERNAME}
+      TASK_DB_PASSWORD: ${TASK_DB_PASSWORD}
+      TASK_DB_NAME: ${TASK_DB_NAME}
+      DB_PORT: 5432
+  task-db:
+    image: postgres:15
+    container_name: ${TASK_DB_URL}
+    networks:
+      - internal
+    restart: always
+    environment:
+      POSTGRES_USER: ${TASK_DB_USERNAME}
+      POSTGRES_PASSWORD: ${TASK_DB_PASSWORD}
+      POSTGRES_DB: ${TASK_DB_NAME}
+
+
+  comment-service:
+    build:
+      context: src/CommentsService
+    networks:
+      - internal
+    depends_on:
+      - comment-db
+    environment:
+      COMMENT_DB_URL: ${COMMENT_DB_URL}
+      COMMENT_DB_USERNAME: ${COMMENT_DB_USERNAME}
+      COMMENT_DB_PASSWORD: ${COMMENT_DB_PASSWORD}
+      COMMENT_DB_NAME: ${COMMENT_DB_NAME}
+      DB_PORT: 5432
+  comment-db:
+    image: postgres:15
+    container_name: ${COMMENT_DB_URL}
+    networks:
+      - internal
+    restart: always
+    environment:
+      POSTGRES_USER: ${COMMENT_DB_USERNAME}
+      POSTGRES_PASSWORD: ${COMMENT_DB_PASSWORD}
+      POSTGRES_DB: ${COMMENT_DB_NAME}
+
+  gateway-service:
+    build:
+      context: src/GatewayService
+    networks:
+      - internal
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - task-service
+      - comment-service
+    environment:
+      JWT_SECURE_KEY: ${JWT_SECURE_KEY}
+
+networks:
+  internal:
+    driver: bridge
