@@ -95,5 +95,4 @@ public class TasksController {
                                       @PathVariable Long user_id) {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.isExecutor(task_id, user_id));
     }
-
 }

@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-import ru.task.users.exceptions.InvalidJwtTokenException;
 import ru.task.users.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import java.security.Key;
@@ -31,13 +30,6 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    public String tokenPrepare(String authHeader) throws Exception {
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7);
-        }
-        else throw new InvalidJwtTokenException();
     }
 
     private Key getSigningKey() {
