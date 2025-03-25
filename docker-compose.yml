@@ -16,7 +16,7 @@ services:
       JWT_SECURE_KEY: ${JWT_SECURE_KEY}
   user-db:
     image: postgres:15
-    container_name: ${USERS_DB_URL}
+#    container_name: ${USERS_DB_URL}
     networks:
       - internal
     restart: always
@@ -41,7 +41,7 @@ services:
       DB_PORT: 5432
   task-db:
     image: postgres:15
-    container_name: ${TASK_DB_URL}
+#    container_name: ${TASK_DB_URL}
     networks:
       - internal
     restart: always
@@ -66,7 +66,7 @@ services:
       DB_PORT: 5432
   comment-db:
     image: postgres:15
-    container_name: ${COMMENT_DB_URL}
+#    container_name: ${COMMENT_DB_URL}
     networks:
       - internal
     restart: always
