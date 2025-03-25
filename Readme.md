@@ -41,20 +41,3 @@ docker-compose up -d
 #### 🔗 http://localhost:8080
 
 #### 📚 Документация: http://localhost:8080/swagger-ui.html
-
-### 🗂 Структура проекта
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── com/
-│   │       └── example/
-│   │           ├── config/       # Конфигурации
-│   │           ├── controller/   # REST контроллеры
-│   │           ├── model/        # Сущности
-│   │           ├── repository/   # Репозитории
-│   │           ├── service/      # Бизнес-логика
-│   │           └── TaskApp.java  # Главный класс
-│   └── resources/
-│       ├── application.yml       # Настройки
-```
