@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.gateway.exceptions.AccessDenyException;
 import ru.gateway.exceptions.TaskNotFoundException;
 import ru.gateway.exceptions.UserNotFoundException;
+import ru.gateway.models.Comment;
 import ru.gateway.models.TaskDto;
 import ru.gateway.models.UserDto;
 
@@ -26,16 +27,12 @@ public class AdminService {
     public ResponseEntity<?> createTask(String authHeader, TaskDto task, Long user_id) {
         if (!jwtService.getUserRoleFromAuthHeader(authHeader).equals("Admin"))
             throw  new AccessDenyException();
-        else if (userClient.getUser(user_id, authHeader) == null)
-            throw  new UserNotFoundException();
         return taskClient.addTask(authHeader, user_id, task);
     }
 
     public ResponseEntity<?> updateTask(String authHeader, TaskDto task, Long task_id, Long user_id) {
         if (!jwtService.getUserRoleFromAuthHeader(authHeader).equals("Admin"))
             throw  new AccessDenyException();
-        else if (taskClient.getTask(authHeader, task_id) == null)
-            throw  new TaskNotFoundException(task_id.toString());
         return taskClient.updateTask(authHeader, user_id, task_id, task);
     }
 
@@ -43,8 +40,19 @@ public class AdminService {
     public ResponseEntity<?> updateTaskState(String authHeader, String status, Long task_id, Long user_id) {
         if (!jwtService.getUserRoleFromAuthHeader(authHeader).equals("Admin"))
             throw  new AccessDenyException();
-        else if (taskClient.getTask(authHeader, task_id) == null)
-            throw  new TaskNotFoundException(task_id.toString());
         return taskClient.updateTaskState(authHeader, user_id, task_id, status);
     }
+
+    public ResponseEntity<?> setTaskExecutor(String authHeader, Long task_id, Long user_id, Long executor_id) {
+        if (!jwtService.getUserRoleFromAuthHeader(authHeader).equals("Admin"))
+            throw  new AccessDenyException();
+        return taskClient.updateExecutor(authHeader, user_id, task_id, executor_id);
+    }
+
+    public ResponseEntity<?> createComment(String authHeader, Long task_id, Comment comment) {
+        if (!jwtService.getUserRoleFromAuthHeader(authHeader).equals("Admin"))
+            throw  new AccessDenyException();
+        return commentClient.addComment(authHeader, task_id, comment);
+    }
+
 }

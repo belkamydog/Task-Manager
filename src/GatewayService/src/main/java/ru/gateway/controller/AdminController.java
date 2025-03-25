@@ -2,7 +2,6 @@ package ru.gateway.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 import ru.gateway.models.Comment;
 import ru.gateway.models.TaskDto;
@@ -14,6 +13,7 @@ import ru.gateway.service.AdminService;
 public class AdminController {
 
     private final AdminService adminService;
+
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
@@ -58,11 +58,12 @@ public class AdminController {
 
     @Operation (summary = "Назначить исполнителя задачи для любой задачи",
             description = "Администратор может назначить исполнителя задачи любого пользователя")
-    @PutMapping("/tasks/{task_id}/executor")
+    @PutMapping("/tasks/{task_id}/{user_id}/executor")
     ResponseEntity<?> setTaskExecutorForUserById(@RequestHeader (name = "Authorization") String authString,
                                                     @PathVariable Long task_id,
+                                                    @PathVariable Long user_id,
                                                     @RequestParam Long executor_id) {
-        return ResponseEntity.ok(executor_id);
+        return adminService.setTaskExecutor(authString, task_id, user_id, executor_id);
     }
 
 
@@ -72,7 +73,7 @@ public class AdminController {
     ResponseEntity<?> createCommentForTaskAdmin(@RequestHeader (name = "Authorization") String authString,
                                                 @PathVariable Long task_id,
                                                 @RequestBody Comment comment) {
-        return ResponseEntity.ok(comment);
+        return adminService.createComment(authString, task_id, comment);
     }
 
     @Operation (summary = "Удаление комментария к любой доступной задаче",

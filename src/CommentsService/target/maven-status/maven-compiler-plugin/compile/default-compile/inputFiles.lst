@@ -1,9 +1,0 @@
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/CommentsApp.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/config/SwaggerConfig.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/controller/CommentsController.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/controller/ExceptionsHandler.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/exceptions/NoSuchCommentException.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/model/Comment.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/model/CommentDto.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/repository/CommentsRepository.java
-/Users/artemefimov/Documents/GitHub/TestTasks/Java/TaskManager/src/CommentsService/src/main/java/ru/comment/service/service/CommentService.java
